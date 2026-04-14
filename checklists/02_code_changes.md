@@ -15,6 +15,9 @@
 
 ## 2-3. DB 드라이버 교체 — Neon → pg (2개)
 - [ ] `server/db.ts` — @neondatabase/serverless NeonPool → 표준 pg Pool. Supabase 폴백 로직 전체 제거
+  - Pool 설정 명시: `max: 10, idleTimeoutMillis: 30000, connectionTimeoutMillis: 5000`
+  - connect-pg-simple 세션 스토어도 같은 Pool 공유 (별도 Pool 생성 금지)
+  - Pool 에러 핸들러 추가: `pool.on('error', (err) => console.error('DB pool error:', err))`
 - [ ] `drizzle.config.ts` — Neon serverless → 표준 PostgreSQL 드라이버
 
 ## 2-4. Supabase 코드 제거 (3개)

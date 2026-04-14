@@ -7,8 +7,12 @@
 
 ## 실행 순서 (6단계)
 
-### Phase 0: 백업 (Day 1-2)
-- [ ] Neon DB 풀 덤프: `pg_dump --format=custom --no-owner $NEON_URL > mfp.dump`
+### Phase 0: 백업 + DB 마이그레이션 (Day 1-2)
+**DB 마이그레이션 절차 (데이터 무결성 보장):**
+- [ ] 유지보수 공지 — 최소 24시간 전 앱 내 배너 게시
+- [ ] D-Day: Replit 앱을 유지보수 모드로 전환 (POST/PUT/PATCH/DELETE → 503 반환)
+- [ ] Neon DB에 활성 쓰기 작업 없음 확인
+- [ ] Neon DB 풀 덤프: `pg_dump --format=custom --no-owner --serializable-deferrable $NEON_URL > mfp_final.dump`
 - [ ] GCS 이미지 전량 다운로드 (rclone 또는 gsutil)
 - [ ] attached_assets (763MB) + uploads (35MB) 백업
 - [ ] Replit Secrets에서 환경변수 전체 export

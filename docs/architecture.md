@@ -51,8 +51,8 @@ MFP 앱 (React) — 사용자 화면
 | VPC | 퍼블릭 서브넷 2 + 프라이빗 서브넷 2 (AZ 2개) |
 | ALB | 퍼블릭 서브넷, 443→5000, ACM SSL |
 | ECS Fargate | 프라이빗 서브넷, desired_count=1 |
-| RDS PostgreSQL | 프라이빗 서브넷, 자동 백업 7일, NAS IP 허용 |
-| S3 | mfp-assets 버킷, CloudFront OAI |
+| RDS PostgreSQL | 프라이빗 서브넷, 자동 백업 7일, NAS IP 허용, 저장 암호화(KMS) + SSL 강제 |
+| S3 | mfp-assets 버킷, 퍼블릭 차단 + CloudFront OAC |
 | CloudFront | S3 오리진, 글로벌 CDN |
 | Route 53 | community.prideofmisfits.com → ALB |
 | Secrets Manager | 60개 환경변수 |
