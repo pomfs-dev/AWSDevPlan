@@ -1,0 +1,46 @@
+# MFP AWS ECS Fargate Dockerfile
+# Node.js 20 Alpine + Sharp(vips) 지원
+
+FROM node:20-alpine AS builder
+
+# Sharp 네이티브 의존성
+RUN apk add --no-cache vips-dev build-base python3
+
+WORKDIR /app
+
+# 의존성 설치
+COPY package*.json ./
+RUN npm ci
+
+# 소스 복사 & 빌드
+COPY . .
+RUN npm run build
+
+# --- 프로덕션 이미지 ---
+FROM node:20-alpine
+
+RUN apk add --no-cache vips-dev wget
+
+WORKDIR /app
+
+# 프로덕션 의존성만 설치
+COPY package*.json ./
+RUN npm ci --omit=dev
+
+# 빌드 아티팩트 복사
+COPY --from=builder /app/dist ./dist
+
+# 정적 파일 (S3 이전 전까지 필요할 수 있음)
+COPY public/ ./public/
+COPY client/public/ ./dist/public/
+
+ENV NODE_ENV=production
+ENV PORT=5000
+
+EXPOSE 5000
+
+# 헬스체크
+HEALTHCHECK --interval=30s --timeout=3s --start-period=10s --retries=3 \
+  CMD wget -qO- http://localhost:5000/health || exit 1
+
+CMD ["node", "dist/index.js"]
