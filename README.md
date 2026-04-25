@@ -45,7 +45,8 @@ AWSDevPlan/
 │   ├── 02_code_changes.md       ← 코드 변경 체크리스트 (22파일)
 │   ├── 03_external_services.md  ← 외부 서비스 설정 변경
 │   ├── 04_testing.md            ← 통합 테스트 체크리스트
-│   └── 05_rollback.md           ← 롤백 계획
+│   ├── 05_rollback.md           ← 롤백 계획
+│   └── 06_figma_make.md         ← Figma Make 병합 후속 작업
 ├── env/
 │   └── .env.template            ← 60개 환경변수 템플릿
 ├── docker/

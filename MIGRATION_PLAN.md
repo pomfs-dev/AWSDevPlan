@@ -22,6 +22,8 @@
 - [ ] 마이그레이션 브랜치: `git checkout -b aws-migration`
 
 ### Phase 1: 코드 변경 (Day 3-7)
+Figma Make 병합 브랜치를 `aws-migration`에 먼저 머지한 뒤 9단계(클라이언트 6개 파일)를 진행한다. 상세: `checklists/06_figma_make.md`
+
 순서가 중요 — 아래 순서대로 진행:
 1. [ ] `server/config.ts` — 모든 파일이 참조하는 기반 설정
 2. [ ] `server/replitAuth.ts` — 부팅 크래시 방지
@@ -31,7 +33,7 @@
 6. [ ] `server/googleSheetsBackup.ts` — Replit Connector → 서비스 계정
 7. [ ] `server/lib/notionClient.ts` — Replit Connector → API 키
 8. [ ] 나머지 서버 파일 4개 (병렬 가능)
-9. [ ] 클라이언트 파일 6개 (병렬 가능)
+9. [ ] 클라이언트 파일 6개 (Figma Make 병합 후 진행, 병렬 가능) — 상세: `checklists/06_figma_make.md` 6-2
 10. [ ] package.json 의존성 정리
 11. [ ] Supabase 코드 삭제 (supabaseSync.ts, supabaseDb.ts)
 12. [ ] `npm run build` 성공 확인
